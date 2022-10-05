@@ -11,7 +11,7 @@
 
 class DataBase {
 public:
-    std::pair<bool,Account> AutenticateAccount(const std::string &accountNumber, const std::string &PIN)const;
+    std::pair<bool,Account> authenticateAccount(const std::string &accountNumber, const std::string &PIN)const;
 
 private:
     std::vector<Account>accounts; // accounts stored in dataBase
