@@ -6,7 +6,7 @@
 #include <map>
 #include "Account.h"
 using namespace std;
-std::pair<bool, Account> DataBase::AthenticateUser(const string &accountNumber, const string &PIN){
+std::pair<bool, Account> DataBase::AthenticateUser(const string &accountNumber, const string &PIN)const{
 
     Account dummy ("","",0);  // DUMMY ACCOUNT in case of not finding account
     pair<bool,Account> searchResult={false,dummy}; // result of search {found or not,account searched}
