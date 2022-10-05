@@ -16,6 +16,7 @@ public:
     bool withdraw(double amount);
     void deposit(double amount);
 
+    Account& operator=(const Account& other);
 private:
     std::string accountNumber;
     std::string PIN;
