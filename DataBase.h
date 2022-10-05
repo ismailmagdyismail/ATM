@@ -11,7 +11,7 @@
 
 class DataBase {
 public:
-    std::pair<bool,Account> AthenticateUser(const std::string &accountNumber, const std::string &PIN);
+    std::pair<bool,Account> AthenticateUser(const std::string &accountNumber, const std::string &PIN)const;
 
 private:
     std::vector<Account>accounts; // accounts stored in dataBase
