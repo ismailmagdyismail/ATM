@@ -13,7 +13,6 @@ public:
     std::string getAccountNumber()const;
     std::string getPIN()const;
 
-    bool operator==(const Account& other)const;
     bool withdraw(double amount);
     void deposit(double amount);
 
