@@ -4,7 +4,9 @@
 
 #include "Account.h"
 
+
 using namespace std;
+
 
 Account::Account(const std::string &accountNumber, const std::string &PIN, const double &balance)
 :accountNumber{accountNumber},PIN{PIN},balance{balance}{}
@@ -22,9 +24,6 @@ std::string Account::getPIN() const {
     return  PIN;
 }
 
-bool Account::operator==(const Account &other) const {
-    return (accountNumber==accountNumber&&PIN==PIN);
-}
 
 void Account::deposit(double amount) {
     balance+=amount;
