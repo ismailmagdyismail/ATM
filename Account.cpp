@@ -4,9 +4,7 @@
 
 #include "Account.h"
 
-
 using namespace std;
-
 
 Account::Account(const std::string &accountNumber, const std::string &PIN, const double &balance)
 :accountNumber{accountNumber},PIN{PIN},balance{balance}{}
@@ -34,6 +32,13 @@ bool Account::withdraw(double amount) {
         return false;
     balance-=amount;
     return true;
+}
+
+Account& Account::operator=(const Account &other) {
+    this->balance = other.getBalance();
+    this->PIN = other.getPIN();
+    this->accountNumber = other.getAccountNumber();
+    return *this;
 }
 
 
