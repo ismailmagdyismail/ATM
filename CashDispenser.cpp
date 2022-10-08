@@ -10,7 +10,7 @@ CashDispenser::CashDispenser(const double &availableMoney) {
 }
 
 
-bool CashDispenser::dispenseMoney(double &amount) {
+bool CashDispenser::dispenseMoney(const double &amount) {
     if(amount>availableMoney)
         return false;
     availableMoney-=amount;
