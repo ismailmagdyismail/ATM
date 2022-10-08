@@ -19,7 +19,6 @@ Withdrawal::Withdrawal(Account *account,Screen* screen,Keypad* keypad,CashDispen
 
 
 void Withdrawal::performTransactions() {
-    displayMenu();
     Account* account  = getAccount();
     Screen* screen = getScreen();
 
@@ -27,7 +26,12 @@ void Withdrawal::performTransactions() {
     bool cancelled = false;
 
     while (!performedTransaction && !cancelled){
+        // displaying withdrawal options
+        displayMenu();
+
+        // getting input
         int input = keypad->getInput();
+
         while (!validInput(input))// validate input
         {
              input = keypad->getInput();
@@ -41,18 +45,13 @@ void Withdrawal::performTransactions() {
         else
         {
             amount = Menu[input-1];
-            bool transaction  = account->withdraw(amount); // withdrawing money from account
-            if(!transaction) // check if successful withdrawal
+            if(account->isSufficient(amount))// check if account hass sufficcient balance
             {
-                screen->display("Current Balance is not sufficient for this transaction,please choose lower amount");
-            }
-            else
-            {
-                // check if there is enough money in dispenser
-                bool dispensed =  dispenser->dispenseMoney(amount);
-                if(dispensed)
+                if(dispenser->isSufficient(amount))// check if there is enough money in dispenser
                 {
-                    // dispense money;
+                    account->withdraw(amount); // withdrawing money from account
+                    dispenser->dispenseMoney(amount);// dispense money;
+
                     screen->display("Withdraw your money from CashDispenser");
                     performedTransaction = true;
                 }
@@ -60,6 +59,10 @@ void Withdrawal::performTransactions() {
                 {
                     screen->display("Cannot dispense that amount of money, please choose lower amount");
                 }
+            }
+            else
+            {
+                screen->display("Current Balance is not sufficient for this transaction,please choose lower amount");
             }
         }
     }
