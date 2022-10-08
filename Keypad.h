@@ -8,7 +8,7 @@
 
 class Keypad {
 public:
-    std::string getInput()const;
+    int getInput()const;
 };
 
 
