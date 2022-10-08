@@ -11,7 +11,8 @@ public:
 
     CashDispenser(const double& availableMoney);
 
-    bool dispenseMoney(double& amount);
+    void dispenseMoney(const double& amount);
+    bool isSufficient(const double& amount);
 
 private:
     double availableMoney;
