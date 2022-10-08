@@ -23,6 +23,13 @@ std::pair<bool, Account> DataBase::authenticateAccount(const string &accountNumb
     return searchResult;
 }
 
+
+void DataBase::updateAccount(const Account & account) {
+    int idx = findAccount(account.getAccountNumber());
+    accounts[idx] = account;
+}
+
+
 int DataBase::findAccount(const string &accountNumber) const { // searching for an account with this account number
     for(int i = 0 ;i<accounts.size();i++)
     {
