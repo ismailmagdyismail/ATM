@@ -13,8 +13,9 @@ public:
     std::string getAccountNumber()const;
     std::string getPIN()const;
 
-    bool withdraw(double amount);
-    void deposit(double amount);
+    bool isSufficient(double amount)const;
+    void withdraw(const double &amount);
+    void deposit(const double &amount);
 
     Account& operator=(const Account& other);
 private:
