@@ -22,16 +22,13 @@ std::string Account::getPIN() const {
     return  PIN;
 }
 
-
-void Account::deposit(double amount) {
+void Account::deposit(const double &amount) {
     balance+=amount;
 }
 
-bool Account::withdraw(double amount) {
-    if(amount>balance)
-        return false;
-    balance-=amount;
-    return true;
+void Account::withdraw(const double &amount) {
+    if(isSufficient(amount))
+        balance-=amount;
 }
 
 Account& Account::operator=(const Account &other) {
@@ -39,6 +36,10 @@ Account& Account::operator=(const Account &other) {
     this->PIN = other.getPIN();
     this->accountNumber = other.getAccountNumber();
     return *this;
+}
+
+bool Account::isSufficient(double amount) const {
+    return amount<= this->balance;
 }
 
 
