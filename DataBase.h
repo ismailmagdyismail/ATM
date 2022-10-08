@@ -12,7 +12,7 @@
 class DataBase {
 public:
     std::pair<bool,Account> authenticateAccount(const std::string &accountNumber, const std::string &PIN)const;
-
+    void updateAccount(const Account&);
 private:
     std::vector<Account>accounts; // accounts stored in dataBase
     int findAccount(const std::string& accountNumber )const;// search the dataBase (helper function)
