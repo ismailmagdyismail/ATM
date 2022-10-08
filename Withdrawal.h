@@ -8,7 +8,7 @@
 #include "Transaction.h"
 #include "CashDispenser.h"
 #include "Keypad.h"
-
+#include "DataBase.h"
 class Withdrawal :Transaction{
 public:
 
