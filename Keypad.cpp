@@ -5,8 +5,8 @@
 #include "Keypad.h"
 using namespace std;
 
-std::string Keypad::getInput() const {
-    string input;
+int Keypad::getInput() const {
+    int input;
     cin>>input;
     return input;
 }
