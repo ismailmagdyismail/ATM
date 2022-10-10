@@ -21,8 +21,8 @@ private:
     Keypad keypad;
     DepositSlot depositSlot;
     DataBase dataBase;
-    bool userAuthenticated ;
-    Account account;
+    bool userAuthenticated ;// state of user authentication
+    Account account; // current account which will get transactions executed upon it
     void authenticateUser();
     int displayMenu()const;
 };
