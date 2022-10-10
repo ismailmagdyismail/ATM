@@ -1,6 +1,4 @@
-//
-// Created by Ismail Magdy on 07/10/2022.
-//
+
 
 #ifndef MAIN_CPP_CASHDISPENSER_H
 #define MAIN_CPP_CASHDISPENSER_H
