@@ -1,12 +1,10 @@
-//
-// Created by Ismail Magdy on 04/10/2022.
-//
+
 
 #include "Account.h"
 
 using namespace std;
 
-Account::Account(const std::string &accountNumber, const std::string &PIN, const double &balance)
+Account::Account(const int &accountNumber, const int &PIN, const double &balance)
 :accountNumber{accountNumber},PIN{PIN},balance{balance}{}
 
 
@@ -14,11 +12,11 @@ double Account::getBalance() const {
     return this->balance;
 }
 
-std::string Account::getAccountNumber()const{
+int Account::getAccountNumber()const{
     return accountNumber;
 }
 
-std::string Account::getPIN() const {
+int  Account::getPIN() const {
     return  PIN;
 }
 
