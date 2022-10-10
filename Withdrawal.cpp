@@ -1,20 +1,13 @@
-//
-// Created by Ismail Magdy on 08/10/2022.
-//
 
 #include "Withdrawal.h"
 using namespace std;
 
-Withdrawal::Withdrawal(Account *account,Screen* screen,Keypad* keypad,CashDispenser* cashDispenser)
+Withdrawal::Withdrawal(Account *account,Screen* screen,Keypad* keypad,CashDispenser* cashDispenser,DataBase* dataBase)
 : Transaction(account,screen){
     amount = 0;
     this->keypad = keypad;
     this->dispenser = cashDispenser;
-    Menu[0]=20;
-    Menu[1]=40;
-    Menu[2]=60;
-    Menu[3]=100;
-    Menu[4]=200;
+    this->dataBase = dataBase;
 }
 
 
@@ -26,61 +19,75 @@ void Withdrawal::performTransactions() {
     bool cancelled = false;
 
     while (!performedTransaction && !cancelled){
+
         // displaying withdrawal options
-        displayMenu();
+        int input = displayMenu();
 
-        // getting input
-        int input = keypad->getInput();
-
-        while (!validInput(input))// validate input
+        if(input == 0 ) // cancelling transaction
         {
-             input = keypad->getInput();
-        }
-
-        if(input == 6 ) // cancelling transaction
-        {
-            screen->display("Cancelling Transaction.....");
+            screen->display("Cancelling Transaction.....\n");
             cancelled = true;
         }
         else
         {
-            amount = Menu[input-1];
+            amount = input;
             if(account->isSufficient(amount))// check if account hass sufficcient balance
             {
                 if(dispenser->isSufficient(amount))// check if there is enough money in dispenser
                 {
                     account->withdraw(amount); // withdrawing money from account
                     dispenser->dispenseMoney(amount);// dispense money;
+                    dataBase->updateAccount(*account);
 
-                    screen->display("Withdraw your money from CashDispenser");
+                    screen->display("Withdraw your money from CashDispenser.....\n");
                     performedTransaction = true;
                 }
                 else
                 {
-                    screen->display("Cannot dispense that amount of money, please choose lower amount");
+                    screen->display("Cannot dispense that amount of money, please choose lower amount\n");
                 }
             }
             else
             {
-                screen->display("Current Balance is not sufficient for this transaction,please choose lower amount");
+                screen->display("Current Balance is not sufficient for this transaction,please choose lower amount\n");
             }
         }
     }
 }
 
-void Withdrawal::displayMenu() const {
+
+// display list of available transactions
+int Withdrawal::displayMenu() const {
+
+    int menu[]={20,40,60,100,200,0}; // list of  available withdrawal options
+
     Screen* screen = getScreen();
-    for (int i = 0; i <5; ++i) {
-        string option;
-        option+=i+1+'0';
-        option+="-";
-        option+= to_string(Menu[i]);
-        option+='$';
-        screen->display(option);
+    bool valid = false;
+    int input;
+
+    while (!valid)
+    {
+        for (int i = 0; i <5; ++i) {
+            string option;
+            option+=i+1+'0';
+            option+="-";
+            option+= to_string(menu[i]);
+            option+='$';
+            screen->display(option);
+        }
+        screen->display("6-Cancel Transaction");
+        screen->display("Choose option : ");
+        input = keypad->getInput();
+        if(validInput(input))
+        {
+            valid = true;
+        }
     }
-    screen->display("6-Cancel Transaction");
+    return menu[input-1];
+
 }
 
+// check if input belongs to the menu options
 bool Withdrawal::validInput(int input) const {
     if(input<1||input>6)
         return false;
