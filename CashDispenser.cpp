@@ -1,20 +1,18 @@
 
+#include "CashDispenser.h"
 
-#ifndef MAIN_CPP_CASHDISPENSER_H
-#define MAIN_CPP_CASHDISPENSER_H
-
-
-class CashDispenser {
-public:
-
-    CashDispenser(const double& availableMoney);
-
-    void dispenseMoney(const double& amount);
-    bool isSufficient(const double& amount);
-
-private:
-    double availableMoney;
-};
+CashDispenser::CashDispenser(const double &availableMoney) {
+    if(availableMoney>=0)
+        this->availableMoney = availableMoney;
+}
 
 
-#endif //MAIN_CPP_CASHDISPENSER_H
+void CashDispenser::dispenseMoney(const double &amount) {
+    if(isSufficient(amount))
+        availableMoney-=amount;
+}
+
+bool CashDispenser::isSufficient(const double &amount) {
+    return amount<=availableMoney;
+}
+
