@@ -1,6 +1,4 @@
-//
-// Created by Ismail Magdy on 08/10/2022.
-//
+
 
 #include <iostream>
 #include "BalanceInquiry.h"
