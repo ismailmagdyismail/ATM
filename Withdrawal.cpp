@@ -73,9 +73,9 @@ int Withdrawal::displayMenu() const {
             option+="-";
             option+= to_string(menu[i]);
             option+='$';
-            screen->display(option);
+            screen->display(option+'\n');
         }
-        screen->display("6-Cancel Transaction");
+        screen->display("6-Cancel Transaction\n");
         screen->display("Choose option : ");
         input = keypad->getInput();
         if(validInput(input))
