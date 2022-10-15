@@ -14,5 +14,5 @@ void BalanceInquiry::performTransactions() {
     double amount = account->getBalance();
     string inquiry = to_string(amount)+'$';
     screen->display("Current Balance : ");
-    screen->display(inquiry);
+    screen->display(inquiry+'\n');
 }
